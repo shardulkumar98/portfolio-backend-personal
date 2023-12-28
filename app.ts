@@ -1,5 +1,5 @@
 import express, { Application, Request, Response } from 'express'
-import testRoutes from './routes/test'
+import router from './routes'
 
 const createServer = (): express.Application => {
   const app: Application = express()
@@ -7,8 +7,7 @@ const createServer = (): express.Application => {
   // Body parsing Middleware
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
-
-  app.use('/test', testRoutes)
+  app.use('/api', router)
 
   app.get('/', async (req: Request, res: Response): Promise<Response> => {
     console.log(req)
