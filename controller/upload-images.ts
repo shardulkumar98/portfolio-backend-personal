@@ -33,6 +33,37 @@ const uploads = {
       res.status(500).send({ success: false, message: 'Internal Server Error' })
     }
   },
+
+  // eslint-disable-next-line no-unused-vars
+  getFiles: async (_req: Request, res: Response): Promise<any> => {
+    try {
+      const getAllData = await FileSchema.find()
+      res.status(200).send({ success: true, message: 'Fetch All Files', data: getAllData })
+    } catch (error) {
+      res.status(500).send({ success: false, message: 'Internal Server Error' })
+    }
+  },
+
+  deleteFile: async (req: Request, res: Response): Promise<any> => {
+    const reqId = req.params.id
+    try {
+      const fileToDelete = await FileSchema.findById(reqId)
+
+      if (!fileToDelete) {
+        return res.status(404).send({ success: false, message: 'File not found' })
+      }
+
+      const deletionResult = await FileSchema.deleteOne({ _id: reqId })
+
+      if (deletionResult.deletedCount === 1) {
+        return res.status(200).send({ success: true, message: 'File deleted successfully' })
+      } else {
+        return res.status(500).send({ success: false, message: 'Failed to delete file' })
+      }
+    } catch (error) {
+      res.status(500).send({ success: false, message: 'Internal Server Error' })
+    }
+  },
 }
 
 export default uploads

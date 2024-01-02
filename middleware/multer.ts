@@ -3,7 +3,6 @@ import multer from 'multer'
 
 const storage = multer.diskStorage({
   //this fuction store images in upload folder in the root
-
   // destination: function (_req: any, file, cb) {
   //   console.log('file :>> ', file)
   //   cb(null, './uploads/')

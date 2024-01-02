@@ -12,7 +12,6 @@ export const uploadCloudinary = async (path: string, folder: string): Promise<an
       // upload_preset: 'ml_default',
       folder: folder,
     })
-    console.log('uploadFileCloud :>> ', uploadFileCloud)
     return uploadFileCloud
   } catch (error) {
     console.error('Error uploading to Cloudinary:', error)

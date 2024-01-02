@@ -16,7 +16,7 @@ if (process.env.MONGO_BASE_URL) {
         // useFindAndModify: false,
         // useUnifiedTopology: true,
       })
-      .then(() => console.log('mongo db connected successfully with server'))
+      .then(() => logger.info('mongo db connected successfully with server'))
       .catch((err) => logger.info(err))
 
     app.listen(port, (): void => {
