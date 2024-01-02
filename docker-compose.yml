@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:latest
+    container_name: portfolio-mongo--db-container
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example_root_password
+      MONGO_INITDB_DATABASE: example_database
+    volumes:
+      - ./mongo-data:/data/db
+
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    container_name: portfolio-conatiner
+    restart: unless-stopped
+    environment:
+      # DATABASE_CLIENT: ${DATABASE_CLIENT}
+      # DATABASE_NAME: ${DATABASE_NAME}
+      # DATABASE_HOST: ${DATABASE_HOST}
+      # DATABASE_PORT: ${DATABASE_PORT}
+      # DATABASE_USERNAME: ${DATABASE_USERNAME}
+      # DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      # DATABASE_SSL: ${DATABASE_SSL}
+      # DATABASE_SCHEMA: ${DATABASE_SCHEMA}
+      # HOST: ${HOST}
+      # PORT: ${PORT}
+      # APP_KEYS: ${APP_KEYS}
+      # API_TOKEN_SALT: ${API_TOKEN_SALT}
+      # ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      # JWT_SECRET: ${JWT_SECRET}
+    volumes:
+      - /app/public/uploads:/app/public/uploads
+    ports:
+      - '8338:5001'
+    depends_on:
+      - mongo

@@ -8,6 +8,14 @@ const fileSchema = new Schema({
     type: String,
     required: true,
   },
+  folderName: {
+    type: String,
+    required: true,
+  },
+  format: {
+    type: String,
+    required: true,
+  },
 })
 
 export const FileSchema = mongoose.model('Files', fileSchema)

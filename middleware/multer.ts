@@ -1,9 +1,13 @@
+/* eslint-disable no-unused-vars */
 import multer from 'multer'
 
 const storage = multer.diskStorage({
-  destination: function (_req: any, file, cb) {
-    cb(null, './uploads/')
-  },
+  //this fuction store images in upload folder in the root
+
+  // destination: function (_req: any, file, cb) {
+  //   console.log('file :>> ', file)
+  //   cb(null, './uploads/')
+  // },
 
   filename: function (_req: any, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9)
@@ -21,6 +25,6 @@ const fileFilter = (_req: any, file: any, cb: any) => {
 
 export const upload = multer({
   storage: storage,
-  limits: { fileSize: 1024 * 1024 },
+  // limits: { fileSize: 1024 * 1024 }, //limits file size
   fileFilter: fileFilter,
 })

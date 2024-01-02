@@ -5,7 +5,6 @@ import mongoose from 'mongoose'
 
 dotenv.config()
 const port = process.env.PORT || 5001
-
 const app = createServer()
 
 if (process.env.MONGO_BASE_URL) {
