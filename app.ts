@@ -1,4 +1,5 @@
-import express, { Application, Request, Response } from 'express'
+import express, { Application } from 'express'
+import cookieParser from 'cookie-parser'
 import router from './routes'
 
 const createServer = (): express.Application => {
@@ -8,13 +9,7 @@ const createServer = (): express.Application => {
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
   app.use('/api', router)
-
-  app.get('/', async (req: Request, res: Response): Promise<Response> => {
-    console.log(req)
-    return res.status(200).send({
-      message: 'Hello World!',
-    })
-  })
+  app.use(cookieParser())
 
   return app
 }

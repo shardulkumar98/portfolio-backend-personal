@@ -35,7 +35,6 @@ const Users = {
       })
 
       if (findUser) {
-        console.log('findUser :>> ', findUser)
         const generateToken = jwt.sign({ email: userBody.email }, `${process.env.SECRET_KEY}`, {
           expiresIn: '1d',
         })
