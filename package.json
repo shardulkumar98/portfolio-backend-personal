@@ -19,14 +19,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://oauth2:glpat-sJarDFfhM3H9yzzZ-2wt@gitlab.com/wil-internal-projects/wil-hire-backend.git"
+    "url": "git+https://github.com/shardulkumar98/portfolio-backend-personal.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/wil-internal-projects/wil-hire-backend/issues"
+    "url": "https://github.com/shardulkumar98/portfolio-backend-personal.git/issues"
   },
-  "homepage": "https://gitlab.com/wil-internal-projects/wil-hire-backend#readme",
+  "homepage": "https://github.com/shardulkumar98/portfolio-backend-personal.git#readme",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "body-parser": "^1.19.1",
