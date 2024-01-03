@@ -1,5 +1,6 @@
 import express, { Application } from 'express'
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 import router from './routes'
 
 const createServer = (): express.Application => {
@@ -7,6 +8,7 @@ const createServer = (): express.Application => {
 
   // Body parsing Middleware
   app.use(express.json())
+  app.use(cors())
   app.use(express.urlencoded({ extended: true }))
   app.use('/api', router)
   app.use(cookieParser())
