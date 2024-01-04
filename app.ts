@@ -13,6 +13,11 @@ const createServer = (): express.Application => {
   app.use('/api', router)
   app.use(cookieParser())
 
+  // eslint-disable-next-line no-unused-vars
+  app.get('/', (_req, res) => {
+    res.status(200).send('Hello World!')
+  })
+
   return app
 }
 
