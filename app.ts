@@ -10,7 +10,7 @@ const createServer = (): express.Application => {
   app.use(express.json())
   app.use(cors())
   app.use(express.urlencoded({ extended: true }))
-  app.use('/api', router)
+  app.use('/.netlify/functions/api', router)
   app.use(cookieParser())
 
   // eslint-disable-next-line no-unused-vars
