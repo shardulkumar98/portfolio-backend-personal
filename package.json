@@ -2,7 +2,7 @@
   "name": "portfolio-backend",
   "version": "1.0.0",
   "description": "",
-  "module": "commonjs",
+  "type": "module",
   "main": "index.ts",
   "scripts": {
     "build": "npm run tsc",
