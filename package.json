@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run tsc",
+    "build:prod": "netlify deploy --prod",
     "start": "./bin/start",
     "start:prod": "node ./dist/index.js",
     "start:dev": "nodemon ./index.ts",
@@ -39,7 +40,10 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.3",
     "multer": "^1.4.5-lts.1",
+    "netlify-cli": "^17.11.0",
+    "netlify-lambda": "^2.0.16",
     "pino": "^7.6.4",
+    "serverless-http": "^3.2.0",
     "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {
