@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
-  "proxy": "https://portfolio-backend-personal.vercel.app",
   "scripts": {
     "build": "npm run tsc",
     "start": "./bin/start",
