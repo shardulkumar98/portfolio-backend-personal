@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "native-server",
   "builds": [
     {
       "src": "./index.ts",
@@ -10,7 +9,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "./index.ts"
+      "dest": "/"
     }
   ]
 }
