@@ -38,7 +38,7 @@ const Users = {
         const generateToken = jwt.sign({ email: userBody.email }, `${process.env.SECRET_KEY}`, {
           expiresIn: '1d',
         })
-        res.status(200).send({ success: true, data: { token: generateToken } })
+        res.status(200).send({ success: true, data: { token: generateToken }, message: 'Logged In Successfully!' })
       } else {
         res.status(404).send({ success: false, message: 'User Not Found' })
       }
