@@ -35,10 +35,20 @@ const Users = {
       })
 
       if (findUser) {
-        const generateToken = jwt.sign({ email: userBody.email }, `${process.env.SECRET_KEY}`, {
-          expiresIn: '1d',
-        })
-        res.status(200).send({ success: true, data: { token: generateToken }, message: 'Logged In Successfully!' })
+        const checkAuth = await bcrypt.compare(userBody.password, findUser.password)
+        if (!checkAuth) {
+          res.status(401).send({ success: false, message: 'Invalid Credentials' })
+        } else {
+          const generateToken = jwt.sign({ email: userBody.email }, `${process.env.SECRET_KEY}`, {
+            expiresIn: '1d',
+          })
+
+          res.status(200).send({
+            success: true,
+            message: 'Logged In Successfully!',
+            data: { userInfo: findUser, token: generateToken },
+          })
+        }
       } else {
         res.status(404).send({ success: false, message: 'User Not Found' })
       }
