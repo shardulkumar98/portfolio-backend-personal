@@ -36,6 +36,7 @@ const uploads = {
 
   uploadFiles: async (req: Request, res: Response): Promise<any> => {
     const imageBody: any = req.files
+    console.log('imageBody', imageBody)
     try {
       if (!imageBody) {
         return res.status(400).send({ success: false, message: 'No file uploaded. Please Select File' })
