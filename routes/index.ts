@@ -7,8 +7,9 @@ const router = express.Router()
 
 router.post('/login', user.UserLogin)
 router.post('/sign-up', user.UserSignUp)
-router.post('/upload', upload.array('image'), files.uploadFiles)
+router.post('/latest-upload', upload.array('image'), files.uploadFiles)
 router.get('/images', files.getFiles)
-router.delete('/upload/:id', files.deleteFile)
+router.delete('/image/:id', files.deleteFile)
+router.post('/upload-images', files.createCategory)
 
 export default router

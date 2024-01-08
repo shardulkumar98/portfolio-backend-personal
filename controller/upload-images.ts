@@ -1,8 +1,39 @@
 import { Request, Response } from 'express'
 import { uploadCloudinary } from '../utils/cloudinary'
 import { FileSchema } from '../models/fileSchema'
+import { CategoryFileSchema } from '../models/categoryUploadSchema'
+import { IFiles } from 'interfaces'
 
 const uploads = {
+  createCategory: async (req: Request, res: Response): Promise<any> => {
+    const reqBody: IFiles = req.body
+    try {
+      if (reqBody && req.method === 'POST') {
+        const createFile = await CategoryFileSchema.create({
+          category: {
+            enum: reqBody.category.enum,
+          },
+          // category: reqBody.category,
+          file: {
+            subCategory: reqBody.file.subCategory,
+            fileDetails: {
+              fileName: reqBody.file.fileDetails.fileName,
+              fileLink: reqBody.file.fileDetails.fileLink,
+              folderName: reqBody.file.fileDetails.folderName,
+              format: reqBody.file.fileDetails.format,
+            },
+          },
+        })
+
+        console.log('createFile', createFile)
+
+        res.status(201).send({ success: true, data: createFile })
+      }
+    } catch (error) {
+      res.status(500).send({ success: false, message: 'Internal Server Error', error })
+    }
+  },
+
   uploadFiles: async (req: Request, res: Response): Promise<any> => {
     const imageBody: any = req.files
     try {
@@ -17,6 +48,7 @@ const uploads = {
         for (const file of files) {
           const { path } = file
           const res = await uploadCloudinary(path, 'images')
+          // const { original_filename, folder, secure_url, format } = res
           const createResDB = await FileSchema.create({
             fileName: res.original_filename,
             folderName: res.folder,
@@ -27,7 +59,11 @@ const uploads = {
           data.push(createResDB)
         }
 
-        res.send({ success: true, message: 'File Uploaded Successfully', data: data })
+        res.send({
+          success: true,
+          message: 'File Uploaded Successfully',
+          data: data,
+        })
       }
     } catch (error) {
       res.status(500).send({ success: false, message: 'Internal Server Error' })
