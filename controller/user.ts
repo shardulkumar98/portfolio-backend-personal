@@ -14,6 +14,8 @@ const Users = {
         const hashPassword = await bcrypt.hash(userBody.password, 10)
         const newUser = await UserSchema.create({
           username: userBody.username,
+          firstName: userBody.firstName,
+          lastName: userBody.lastName,
           email: userBody.email,
           password: hashPassword,
         })

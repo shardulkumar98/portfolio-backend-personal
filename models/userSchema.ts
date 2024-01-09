@@ -1,10 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
-
-interface IUser {
-  username: string
-  email: string
-  password: string
-}
+import { IUser } from 'interfaces'
 
 const userSchema = new Schema<IUser>(
   {
@@ -13,6 +8,14 @@ const userSchema = new Schema<IUser>(
       required: true,
     },
     username: {
+      type: String,
+      required: true,
+    },
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
       type: String,
       required: true,
     },
