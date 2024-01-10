@@ -74,28 +74,36 @@ const fileSchema = new Schema({
 
 // Define the category upload schema
 interface ICategoryUpload extends Document {
-  category: 'image' | 'video'
-  files: {
-    subCategory: string
-    fileDetails: {
-      fileName: string
-      fileLink: string
-      folderName: string
-      format: string
-    }
-  }[]
+  images: [
+    {
+      category: 'image' | 'video'
+      files: {
+        subCategory: string
+        fileDetails: {
+          fileName: string
+          fileLink: string
+          folderName: string
+          format: string
+        }
+      }
+    },
+  ]
 }
 
 const categoryUploadSchema = new Schema<ICategoryUpload>({
-  category: {
-    type: String,
-    enum: ['image', 'video'],
-    required: [true, 'Category is required.'],
-  },
-  files: {
-    type: [fileSchema],
-    required: [true, 'Files are required.'],
-  },
+  images: [
+    {
+      category: {
+        type: String,
+        enum: ['image', 'video'],
+        required: [true, 'Category is required.'],
+      },
+      files: {
+        type: [fileSchema],
+        required: [true, 'Files are required.'],
+      },
+    },
+  ],
 })
 
 export const CategoryFileSchema = model<ICategoryUpload>('CategoryUpload', categoryUploadSchema)

@@ -7,18 +7,22 @@ export interface IUser {
 }
 
 export interface IFiles {
-  category: {
-    enum: string
-  }
-  files: [
+  images: [
     {
-      subCategory: string
-      fileDetails: {
-        fileName: string
-        fileLink: string
-        folderName: string
-        format: string
+      category: {
+        enum: string
       }
+      files: [
+        {
+          subCategory: string
+          fileDetails: {
+            fileName: string
+            fileLink: string
+            folderName: string
+            format: string
+          }
+        },
+      ]
     },
   ]
 }

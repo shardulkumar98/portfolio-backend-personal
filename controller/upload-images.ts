@@ -9,23 +9,41 @@ const uploads = {
     const reqBody: IFiles = req.body
     try {
       if (reqBody && req.method === 'POST') {
-        const fileData = req.body.files.map((e: any) => {
+        const fileData = reqBody.images.map((ele) => {
           return {
-            subCategory: e.subCategory,
-            fileDetails: e.fileDetails.map((e: any) => {
+            category: ele.category,
+            files: ele.files.map((e: any) => {
               return {
-                fileName: e.fileName,
-                fileLink: e.fileLink,
-                folderName: e.folderName,
-                format: e.format,
+                subCategory: e.subCategory,
+                fileDetails: e.fileDetails.map((e: any) => {
+                  return {
+                    fileName: e.fileName,
+                    fileLink: e.fileLink,
+                    folderName: e.folderName,
+                    format: e.format,
+                  }
+                }),
               }
             }),
           }
         })
 
+        // const fileData = ele.files.map((e: any) => {
+        //   return {
+        //     subCategory: e.subCategory,
+        //     fileDetails: e.fileDetails.map((e: any) => {
+        //       return {
+        //         fileName: e.fileName,
+        //         fileLink: e.fileLink,
+        //         folderName: e.folderName,
+        //         format: e.format,
+        //       }
+        //     }),
+        //   }
+        // })
+
         const createFile = await CategoryFileSchema.create({
-          category: reqBody.category,
-          files: fileData,
+          images: fileData,
         })
         res.status(201).send({ success: true, message: 'Files Uploaded Successfully', data: createFile })
       }
