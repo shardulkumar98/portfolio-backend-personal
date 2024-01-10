@@ -8,18 +8,23 @@ const uploads = {
   createCategory: async (req: Request, res: Response): Promise<any> => {
     const reqBody: IFiles = req.body
     try {
+      console.log('reqBody', reqBody)
       if (reqBody && req.method === 'POST') {
         const fileData = req.body.files.map((e: any) => {
           return {
             subCategory: e.subCategory,
-            fileDetails: {
-              fileName: e.fileDetails.fileName,
-              fileLink: e.fileDetails.fileLink,
-              folderName: e.fileDetails.folderName,
-              format: e.fileDetails.format,
-            },
+            fileDetails: e.fileDetails.map((e: any) => {
+              return {
+                fileName: e.fileName,
+                fileLink: e.fileLink,
+                folderName: e.folderName,
+                format: e.format,
+              }
+            }),
           }
         })
+
+        console.log('fileData', fileData)
 
         const createFile = await CategoryFileSchema.create({
           category: reqBody.category,

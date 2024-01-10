@@ -66,7 +66,10 @@ const fileSchema = new Schema({
     type: String,
     required: [true, 'SubCategory is required.'],
   },
-  fileDetails: fileDetailsSchema,
+  fileDetails: {
+    type: [fileDetailsSchema],
+    required: [true, 'Files are required.'],
+  },
 })
 
 // Define the category upload schema
