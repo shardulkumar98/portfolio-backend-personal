@@ -24,16 +24,11 @@ const uploads = {
           }
         })
 
-        console.log('fileData', fileData)
-
         const createFile = await CategoryFileSchema.create({
           category: reqBody.category,
           files: fileData,
         })
-
-        console.log('createFile', createFile)
-
-        res.status(201).send({ success: true, data: createFile })
+        res.status(201).send({ success: true, message: 'Files Uploaded Successfully', data: createFile })
       }
     } catch (error) {
       res.status(500).send({ success: false, message: 'Internal Server Error', error })
@@ -78,7 +73,7 @@ const uploads = {
 
         res.send({
           success: true,
-          message: 'File Uploaded Successfully',
+          // message: 'File Uploaded Successfully',
           data: data,
         })
       }
