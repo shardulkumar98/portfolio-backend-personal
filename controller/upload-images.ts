@@ -8,7 +8,6 @@ const uploads = {
   createCategory: async (req: Request, res: Response): Promise<any> => {
     const reqBody: IFiles = req.body
     try {
-      console.log('reqBody', reqBody)
       if (reqBody && req.method === 'POST') {
         const fileData = req.body.files.map((e: any) => {
           return {
@@ -47,7 +46,6 @@ const uploads = {
 
   uploadFiles: async (req: Request, res: Response): Promise<any> => {
     const imageBody: any = req.files
-    console.log('imageBody', imageBody)
     try {
       if (!imageBody) {
         return res.status(400).send({ success: false, message: 'No file uploaded. Please Select File' })
