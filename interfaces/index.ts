@@ -10,13 +10,15 @@ export interface IFiles {
   category: {
     enum: string
   }
-  file: {
-    subCategory: string
-    fileDetails: {
-      fileName: string
-      fileLink: string
-      folderName: string
-      format: string
-    }
-  }
+  files: [
+    {
+      subCategory: string
+      fileDetails: {
+        fileName: string
+        fileLink: string
+        folderName: string
+        format: string
+      }
+    },
+  ]
 }

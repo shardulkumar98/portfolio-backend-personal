@@ -9,20 +9,21 @@ const uploads = {
     const reqBody: IFiles = req.body
     try {
       if (reqBody && req.method === 'POST') {
-        const createFile = await CategoryFileSchema.create({
-          category: {
-            enum: reqBody.category.enum,
-          },
-          // category: reqBody.category,
-          file: {
-            subCategory: reqBody.file.subCategory,
+        const fileData = req.body.files.map((e: any) => {
+          return {
+            subCategory: e.subCategory,
             fileDetails: {
-              fileName: reqBody.file.fileDetails.fileName,
-              fileLink: reqBody.file.fileDetails.fileLink,
-              folderName: reqBody.file.fileDetails.folderName,
-              format: reqBody.file.fileDetails.format,
+              fileName: e.fileDetails.fileName,
+              fileLink: e.fileDetails.fileLink,
+              folderName: e.fileDetails.folderName,
+              format: e.fileDetails.format,
             },
-          },
+          }
+        })
+
+        const createFile = await CategoryFileSchema.create({
+          category: reqBody.category,
+          files: fileData,
         })
 
         console.log('createFile', createFile)
@@ -67,7 +68,7 @@ const uploads = {
         })
       }
     } catch (error) {
-      res.status(500).send({ success: false, message: 'Internal Server Error' })
+      res.status(500).send({ success: false, message: 'Internal Server Error', error })
     }
   },
 

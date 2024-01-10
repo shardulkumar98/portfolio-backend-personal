@@ -1,36 +1,98 @@
-import { Schema, model } from 'mongoose'
+// import { IFiles } from 'interfaces'
+// import { Schema, model } from 'mongoose'
 
+// const fileSchema = new Schema({
+//   subCategory: {
+//     type: String,
+//     required: [true, 'SubCategory is required.'],
+//   },
+//   fileDetails: {
+//     fileName: {
+//       type: String,
+//       required: [true, 'FileName is required.'],
+//     },
+//     fileLink: {
+//       type: String,
+//       required: [true, 'FileLink is required.'],
+//     },
+//     folderName: {
+//       type: String,
+//       required: [true, 'FolderName is required.'],
+//     },
+//     format: {
+//       type: String,
+//       required: [true, 'Format is required.'],
+//     },
+//   },
+// })
+
+// const categoryUploadSchema = new Schema<IFiles>({
+//   category: {
+//     type: Object,
+//     enum: ['image', 'video'],
+//     required: true,
+//   },
+//   files: { fileSchema, type: Array, required: true },
+// })
+
+// export const CategoryFileSchema = model('CategoryUpload', categoryUploadSchema)
+
+// import { IFiles } from 'interfaces'
+import { Schema, model, Document } from 'mongoose'
+
+// Define the file details schema
+const fileDetailsSchema = new Schema({
+  fileName: {
+    type: String,
+    required: [true, 'FileName is required.'],
+  },
+  fileLink: {
+    type: String,
+    required: [true, 'FileLink is required.'],
+  },
+  folderName: {
+    type: String,
+    required: [true, 'FolderName is required.'],
+  },
+  format: {
+    type: String,
+    required: [true, 'Format is required.'],
+  },
+})
+
+// Define the file schema
 const fileSchema = new Schema({
   subCategory: {
     type: String,
-    required: true,
+    required: [true, 'SubCategory is required.'],
   },
-  fileDetails: {
-    fileName: {
-      type: String,
-    },
-    fileLink: {
-      type: String,
-      required: true,
-    },
-    folderName: {
-      type: String,
-      required: true,
-    },
-    format: {
-      type: String,
-      required: true,
-    },
-  },
+  fileDetails: fileDetailsSchema,
 })
 
-const categoryUploadSchema = new Schema({
+// Define the category upload schema
+interface ICategoryUpload extends Document {
+  category: 'image' | 'video'
+  files: {
+    subCategory: string
+    fileDetails: {
+      fileName: string
+      fileLink: string
+      folderName: string
+      format: string
+    }
+  }[]
+}
+
+const categoryUploadSchema = new Schema<ICategoryUpload>({
   category: {
-    type: Object,
+    type: String,
     enum: ['image', 'video'],
-    required: true,
+    required: [true, 'Category is required.'],
   },
-  file: fileSchema,
+  files: {
+    type: [fileSchema],
+    required: [true, 'Files are required.'],
+  },
 })
 
-export const CategoryFileSchema = model('CategoryUpload', categoryUploadSchema)
+export const CategoryFileSchema = model<ICategoryUpload>('CategoryUpload', categoryUploadSchema)
