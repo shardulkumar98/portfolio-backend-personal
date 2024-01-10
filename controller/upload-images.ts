@@ -35,6 +35,16 @@ const uploads = {
     }
   },
 
+  // eslint-disable-next-line no-unused-vars
+  getAllCategoryFiles: async (_req: Request, res: Response): Promise<any> => {
+    try {
+      const getAllFiles = await CategoryFileSchema.find()
+      res.status(200).send({ success: true, message: 'Fetch All Files', data: getAllFiles })
+    } catch (error) {
+      res.status(500).send({ success: false, message: 'Internal Server Error', error })
+    }
+  },
+
   uploadFiles: async (req: Request, res: Response): Promise<any> => {
     const imageBody: any = req.files
     console.log('imageBody', imageBody)

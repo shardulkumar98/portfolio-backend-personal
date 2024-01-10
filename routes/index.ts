@@ -11,5 +11,6 @@ router.post('/latest-upload', upload.array('image'), files.uploadFiles)
 router.get('/images', files.getFiles)
 router.delete('/image/:id', files.deleteFile)
 router.post('/upload-images', files.createCategory)
+router.get('/category-images', files.getAllCategoryFiles)
 
 export default router
