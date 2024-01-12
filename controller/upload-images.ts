@@ -27,24 +27,10 @@ const uploads = {
             }),
           }
         })
-
-        // const fileData = ele.files.map((e: any) => {
-        //   return {
-        //     subCategory: e.subCategory,
-        //     fileDetails: e.fileDetails.map((e: any) => {
-        //       return {
-        //         fileName: e.fileName,
-        //         fileLink: e.fileLink,
-        //         folderName: e.folderName,
-        //         format: e.format,
-        //       }
-        //     }),
-        //   }
-        // })
-
         const createFile = await CategoryFileSchema.create({
           images: fileData,
         })
+        console.log('createFile', createFile)
         res.status(201).send({ success: true, message: 'Files Uploaded Successfully', data: createFile })
       }
     } catch (error) {
@@ -56,7 +42,7 @@ const uploads = {
   getAllCategoryFiles: async (_req: Request, res: Response): Promise<any> => {
     try {
       const getAllFiles = await CategoryFileSchema.find()
-      res.status(200).send({ success: true, message: 'Fetch All Files', data: getAllFiles })
+      res.status(200).send({ success: true, data: getAllFiles })
     } catch (error) {
       res.status(500).send({ success: false, message: 'Internal Server Error', error })
     }
@@ -102,7 +88,7 @@ const uploads = {
   getFiles: async (_req: Request, res: Response): Promise<any> => {
     try {
       const getAllData = await FileSchema.find()
-      res.status(200).send({ success: true, message: 'Fetch All Files', data: getAllData })
+      res.status(200).send({ success: true, data: getAllData })
     } catch (error) {
       res.status(500).send({ success: false, message: 'Internal Server Error' })
     }
