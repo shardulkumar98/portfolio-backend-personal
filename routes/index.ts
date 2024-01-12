@@ -7,7 +7,7 @@ const router = express.Router()
 
 router.post('/login', user.UserLogin)
 router.post('/sign-up', user.UserSignUp)
-router.post('/latest-upload', upload.array('image'), files.uploadFiles)
+router.post('/latest-upload', upload.fields([{ name: 'image' }, { name: 'video' }]), files.uploadFiles)
 router.get('/images', files.getFiles)
 router.delete('/image/:id', files.deleteFile)
 router.post('/upload-images', files.createCategory)

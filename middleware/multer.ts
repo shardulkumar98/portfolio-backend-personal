@@ -15,7 +15,12 @@ const storage = multer.diskStorage({
 })
 
 const fileFilter = (_req: any, file: any, cb: any) => {
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+  if (
+    file.mimetype === 'image/jpeg' ||
+    file.mimetype === 'image/png' ||
+    file.mimetype === 'image/jpg' ||
+    file.mimetype === 'video/mp4'
+  ) {
     cb(null, true)
   } else {
     cb({ message: 'Unsupported File Format' }, false)
@@ -24,6 +29,6 @@ const fileFilter = (_req: any, file: any, cb: any) => {
 
 export const upload = multer({
   storage: storage,
-  // limits: { fileSize: 1024 * 1024 }, //limits file size
+  // limits: { fileSize: 10485760 }, //limits file size
   fileFilter: fileFilter,
 })

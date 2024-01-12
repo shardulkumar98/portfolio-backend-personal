@@ -50,6 +50,7 @@ const uploads = {
 
   uploadFiles: async (req: Request, res: Response): Promise<any> => {
     const imageBody: any = req.files
+
     try {
       if (!imageBody) {
         return res.status(400).send({ success: false, message: 'No file uploaded. Please Select File' })
@@ -57,12 +58,15 @@ const uploads = {
 
       if (req.method === 'POST') {
         const files = imageBody
+        const videoFile = files?.video || []
+        const imageFile = files?.image || []
+        const customBodyFiles = [...imageFile, ...videoFile]
+
         const data = []
 
-        for (const file of files) {
+        for (const file of customBodyFiles) {
           const { path } = file
-          const res = await uploadCloudinary(path, 'images')
-          // const { original_filename, folder, secure_url, format } = res
+          const res = await uploadCloudinary(path, 'mediaFiles')
           const createResDB = await FileSchema.create({
             fileName: res.original_filename,
             folderName: res.folder,
@@ -75,7 +79,6 @@ const uploads = {
 
         res.send({
           success: true,
-          // message: 'File Uploaded Successfully',
           data: data,
         })
       }
