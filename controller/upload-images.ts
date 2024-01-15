@@ -30,7 +30,6 @@ const uploads = {
         const createFile = await CategoryFileSchema.create({
           images: fileData,
         })
-        console.log('createFile', createFile)
         res.status(201).send({ success: true, message: 'Files Uploaded Successfully', data: createFile })
       }
     } catch (error) {
@@ -66,12 +65,13 @@ const uploads = {
 
         for (const file of customBodyFiles) {
           const { path } = file
-          const res = await uploadCloudinary(path, 'mediaFiles')
+          const cloudinaryResponse = await uploadCloudinary(path, 'mediaFiles')
+
           const createResDB = await FileSchema.create({
-            fileName: res.original_filename,
-            folderName: res.folder,
-            fileLink: res.secure_url,
-            format: res.format,
+            fileName: cloudinaryResponse.original_filename,
+            folderName: cloudinaryResponse.folder,
+            fileLink: cloudinaryResponse.secure_url,
+            format: cloudinaryResponse.format,
           })
 
           data.push(createResDB)
